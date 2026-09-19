@@ -42,8 +42,8 @@ config.source.randomize.off()
 # Construct the beam and visualize its plane-wave modes
 beam = vw.setup_beam(config)
 
-# Requires matplotlib, install with  'viz' extra: pip install vectorwaves[viz]
-beam.plot_kspace_3d(plot_type='colored_vectors')
+# Requires matplotlib, included with  'viz' extra
+beam.plot_kspace_3d(plot_type='matplotlib_scatter')
 ```
 
 ![LG beam k-space](https://github.com/M-Soni-Physics/VectorWaves/blob/main/docs/images/LG_kspace.png?raw=true)
