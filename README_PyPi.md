@@ -46,6 +46,6 @@ beam = vw.setup_beam(config)
 beam.plot_kspace_3d(plot_type='colored_vectors')
 ```
 
-![LG beam k-space](https://github.com/1Rayokelvin/VectorWaves/blob/main/docs/images/LG_kspace.png?raw=true)
+![LG beam k-space](https://github.com/M-Soni-Physics/VectorWaves/blob/main/docs/images/LG_kspace.png?raw=true)
 
-For tutorials and examples, please refer to the [official documentation](https://1rayokelvin.github.io/VectorWaves). Source code is available on [GitHub](https://github.com/1Rayokelvin/VectorWaves/).
+For tutorials and examples, please refer to the [official documentation](https://M-Soni-Physics.github.io/VectorWaves). Source code is available on [GitHub](https://github.com/M-Soni-Physics/VectorWaves/).

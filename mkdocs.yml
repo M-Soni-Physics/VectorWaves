@@ -1,6 +1,6 @@
 site_name: VectorWaves
 site_description: 3D Optical Field Simulations and Singularity Tracking
-repo_url: https://github.com/1Rayokelvin/VectorWaves
+repo_url: https://github.com/M-Soni-Physics/VectorWaves
 
 theme:
   name: material

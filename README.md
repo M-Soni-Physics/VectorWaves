@@ -4,7 +4,7 @@ A Python library for constructing and analyzing electromagnetic fields through d
 
 Classical light is fundamentally an electromagnetic wave. In vacuum, electromagnetic fields admit a plane-wave decomposition, and VectorWaves provides a framework for constructing, computing, and analyzing fully three-dimensional vector fields and their topological structures.
 
-**For full documentation, basic usage, and tutorials, visit the [official documentation site](https://1rayokelvin.github.io/VectorWaves).**
+**For full documentation, basic usage, and tutorials, visit the [official documentation site](https://M-Soni-Physics.github.io/VectorWaves).**
 
 ## Installation
 
@@ -80,7 +80,7 @@ plt.show()
 *(Note the colorbar scales: the solver automatically calculates the correct relative magnitudes of the emergent longitudinal components without any paraxial approximations).*
 
 ### Ready to learn more?
-For a gentler introduction covering basic configurations, spectral envelopes, or fully 3D field visualizations, head over to the **[Getting Started Guide](https://1rayokelvin.github.io/VectorWaves)**.
+For a gentler introduction covering basic configurations, spectral envelopes, or fully 3D field visualizations, head over to the **[Getting Started Guide](https://M-Soni-Physics.github.io/VectorWaves)**.
 
 
 ## Contributing

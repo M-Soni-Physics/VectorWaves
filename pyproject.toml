@@ -55,10 +55,10 @@ keywords = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/1Rayokelvin/VectorWaves"
-Repository = "https://github.com/1Rayokelvin/VectorWaves"
-Issues = "https://github.com/1Rayokelvin/VectorWaves/issues"
-Documentation = "https://1rayokelvin.github.io/VectorWaves" 
+Homepage = "https://github.com/M-Soni-Physics/VectorWaves"
+Repository = "https://github.com/M-Soni-Physics/VectorWaves"
+Issues = "https://github.com/M-Soni-Physics/VectorWaves/issues"
+Documentation = "https://M-Soni-Physics.github.io/VectorWaves" 
 
 [project.optional-dependencies]
 viz = [
