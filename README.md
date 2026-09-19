@@ -81,3 +81,8 @@ plt.show()
 
 ### Ready to learn more?
 For a gentler introduction covering basic configurations, spectral envelopes, or fully 3D field visualizations, head over to the **[Getting Started Guide](https://1rayokelvin.github.io/VectorWaves)**.
+
+
+## Contributing
+
+Contributions, bug reports, and feature requests are welcome! If you want to contribute or set up VectorWaves locally for testing, please see the [Contributing Guide](CONTRIBUTING.md).

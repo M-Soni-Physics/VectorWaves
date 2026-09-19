@@ -14,7 +14,6 @@ license = { file = "LICENSE" }
 requires-python = ">=3.10"
 
 # CORE DEPENDENCIES
-# These are strictly required for the physics pipeline to function.
 dependencies = [
   "numpy>=1.24.0",
   "scipy>=1.10.0",
@@ -23,20 +22,15 @@ dependencies = [
 
 classifiers = [
     "Development Status :: 4 - Beta",
-
     "Intended Audience :: Science/Research",
     "Intended Audience :: Education",
-
     "License :: OSI Approved :: MIT License",
-
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-
     "Operating System :: OS Independent",
-
     "Topic :: Scientific/Engineering :: Physics",
     "Topic :: Scientific/Engineering",
 ]
@@ -60,29 +54,36 @@ keywords = [
     "optical-vortices"
 ]
 
+[project.urls]
+Homepage = "https://github.com/1Rayokelvin/VectorWaves"
+Repository = "https://github.com/1Rayokelvin/VectorWaves"
+Issues = "https://github.com/1Rayokelvin/VectorWaves/issues"
+Documentation = "https://1rayokelvin.github.io/VectorWaves" 
+
 [project.optional-dependencies]
-# VISUALIZATION: Plotting k-space, profiles, and tutorials
 viz = [
   "matplotlib>=3.7.0",
   "pyvista>=0.40.0"
 ]
 
-# PROGRESS: Console loading bars
 progress = [
   "tqdm>=4.65.0"
 ]
 
-# GPU: CuPy for CUDA 12.x (Note: Users with AMD or older CUDA will need to install their specific cupy build)
 gpu = [
   "cupy-cuda12x>=12.0.0"
 ]
 
-# ALL optional dependencies
 all = [
   "matplotlib>=3.7.0",
   "pyvista>=0.40.0",
   "tqdm>=4.65.0",
   "cupy-cuda12x>=12.0.0"
+]
+
+test = [
+  "pytest>=7.4.0",
+  "pytest-cov>=4.1.0"
 ]
 
 [tool.setuptools.dynamic]
@@ -94,8 +95,15 @@ package-dir = { "" = "src" }
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[project.urls]
-Homepage = "https://github.com/1Rayokelvin/VectorWaves"
-Repository = "https://github.com/1Rayokelvin/VectorWaves"
-Issues = "https://github.com/1Rayokelvin/VectorWaves/issues"
-Documentation = "https://1rayokelvin.github.io/VectorWaves" 
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-p no:cacheprovider --import-mode=importlib"
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true

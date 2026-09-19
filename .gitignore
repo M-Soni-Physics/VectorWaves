@@ -21,9 +21,11 @@ dist/
 pip-wheel-metadata/
 
 # -------------------------
-# MkDocs build output
+# MkDocs, pytest build output
 # -------------------------
 site/
+htmlcov/
+.coverage
 
 # -------------------------
 # Jupyter
