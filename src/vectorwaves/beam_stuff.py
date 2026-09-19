@@ -439,7 +439,7 @@ class BeamMaker:
         """        
         modes = self.config.source.num_modes
         if modes < 1:
-            raise ValueError(f"num_modes must be >= 1. Got: {modes}.")
+            raise ValueError(f"num_modes must be > 0. Got: {modes}.")
         elif modes == 1:
             warnings.warn("num_modes is 1. Generating a pure single plane wave.")
         elif modes < 10:
@@ -544,7 +544,7 @@ class BeamMaker:
         # --- K-Space Amplitude Spectrum ---
         kspace_cfg = self.config.source.k_space
         if kspace_cfg.vectorised:
-            amps = np.asarray(kspace_cfg.profile(ks.T, **kspace_cfg.params), dtype=complex).squeeze()
+            amps = np.asarray(kspace_cfg.profile(ks.T, **kspace_cfg.params), dtype=complex).reshape(N)
         else:
             amps = np.array([kspace_cfg.profile(k, **kspace_cfg.params) for k in ks], dtype=complex)
 

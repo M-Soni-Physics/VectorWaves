@@ -67,6 +67,9 @@ def _coerce_tuple(val: Any, length: int, name: str, dtype: Type = float) -> Tupl
 
 class SerializableConfig:
     """Base class providing JSON serialization and generic config features."""
+    def validate(self):
+        """Override in subclasses to enforce physical constraints."""
+        pass
     def to_dict(self) -> Dict[str, Any]:
         out = {}
         if self.__class__.__name__ == "Config":
@@ -167,6 +170,7 @@ class SerializableConfig:
     
     def save(self, filename: str):
         if not filename.endswith(".json"): raise ValueError("filename must end with '.json'")
+        self.validate()
         with open(filename, 'w') as f: json.dump(self.to_dict(), f, indent=4)
 
     @classmethod
@@ -457,7 +461,7 @@ class KSpaceConfig(SerializableConfig):
             res = self.profile(test_k, **self.params)
             if self.vectorised and (not hasattr(res, "__len__") or len(res) != 2): 
                 raise ValueError("Vectorised function must return an array matching input shape.")
-            elif not self.vectorised and not np.isscalar(res) and not isinstance(res, complex): 
+            elif not self.vectorised and not isinstance(res, (int, float, complex, np.number)):
                 raise ValueError("Non-vectorised function must return a scalar.")
         except Exception as e:
             raise RuntimeError(f"K space profile failed validation: {e}")

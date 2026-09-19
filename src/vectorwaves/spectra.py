@@ -141,7 +141,7 @@ class KSpaceSpectra:
     
         res = (radial * poly_val * gaussian_env * vortex).astype(complex)
         res = np.where(k_perp_sq == 0, 0j, res)
-        return res if res.size > 1 else res[0]
+        return res.item() if res.ndim == 0 else res    
     
     @staticmethod
     def hermite_gauss(k_vec: np.ndarray, l: int, m: int, sigma_k_perp: float) -> np.ndarray:
@@ -215,6 +215,9 @@ class KSpaceSpectra:
             Complex amplitude weights defining the BG mode.
         """
         # Extract components - each has shape (N,)
+        is_1d = k_vec.ndim == 1
+        if is_1d:
+            k_vec = k_vec.reshape(3, 1)
         kx, ky, kz = k_vec[0], k_vec[1], k_vec[2]
         k_mag = np.sqrt(kx**2 + ky**2 + kz**2)
         res = np.zeros_like(k_mag, dtype=complex)
@@ -233,7 +236,7 @@ class KSpaceSpectra:
         else:
             res[mask] = ring_profile[mask]
         
-        return res
+        return res[0] if is_1d else res
 
 class PolychromaticSpectra:
     """
