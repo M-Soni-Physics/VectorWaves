@@ -80,4 +80,4 @@ plt.show()
 *(Note the colorbar scales: the solver automatically calculates the correct relative magnitudes of the emergent longitudinal components without any paraxial approximations).*
 
 ### Ready to learn more?
-For a gentler introduction covering basic configurations, spectral envelopes, or fully 3D field visualizations, head over to the **[Getting Started Guide](https://1rayokelvin.github.io/VectorWaves)**.
+For a gentler introduction covering basic configurations, spectral envelopes, or fully 3D field visualizations, head over to the **[Getting Started Guide](https://m-soni-physics.github.io/VectorWaves)**.
