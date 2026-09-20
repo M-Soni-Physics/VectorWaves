@@ -521,46 +521,61 @@ class SingularityFinder:
             corr_xyz = pred_xyz[valid_t]
             corr_active = np.ones(len(corr_xyz), dtype=bool)
             corr_success = np.zeros(len(corr_xyz), dtype=bool)
-            
+
             for _ in range(max_iter):
                 if not np.any(corr_active):
                     break
+
+                # Fixed map: position in the evaluated subset -> index in corr_xyz.
+                # Must be computed BEFORE corr_active is mutated below.
+                active_corr_idx = np.where(corr_active)[0]
                 c_fields = self.engine.compute_cloud(
                     corr_xyz[corr_active, 0], corr_xyz[corr_active, 1], corr_xyz[corr_active, 2],
                     t=self.t, need_b=False
                 )
                 c_v, c_J = val_jac_func(c_fields.E, c_fields.jacobian_E)
-                
-                # Check convergence
+
+                # Convergence check (length = number of currently active lines)
                 c_converged = np.linalg.norm(c_v, axis=1) < value_tol
-                just_converged = c_converged & corr_active
-                corr_success[just_converged] = True
-                corr_active[just_converged] = False
-                
+                corr_success[active_corr_idx[c_converged]] = True
+                corr_active[active_corr_idx[c_converged]] = False
+
                 not_conv = ~c_converged
-                if np.any(not_conv):
-                    # Minimum Norm Pseudoinverse: Delta = J.T * (J * J.T)^-1 * vals
-                    nc_J, nc_v = c_J[not_conv], c_v[not_conv]
-                    JJT_00 = np.sum(nc_J[:, 0, :]**2, axis=1)
-                    JJT_11 = np.sum(nc_J[:, 1, :]**2, axis=1)
-                    JJT_01 = np.sum(nc_J[:, 0, :] * nc_J[:, 1, :], axis=1)
-                    
-                    det = JJT_00 * JJT_11 - JJT_01**2
-                    vdet = np.abs(det) > 1e-14
-                    inv_det = np.where(vdet, 1.0 / np.where(vdet, det, 1.0), 0.0)
-                    
-                    # Solve (J * J.T) * lambda = vals
-                    lam_0 = ( JJT_11 * nc_v[:, 0] - JJT_01 * nc_v[:, 1]) * inv_det
-                    lam_1 = (-JJT_01 * nc_v[:, 0] + JJT_00 * nc_v[:, 1]) * inv_det
-                    
-                    # Update X = X - J.T * lambda
-                    update_idx = np.where(corr_active)[0][not_conv]
-                    corr_xyz[update_idx, 0] -= nc_J[:, 0, 0] * lam_0 + nc_J[:, 1, 0] * lam_1
-                    corr_xyz[update_idx, 1] -= nc_J[:, 0, 1] * lam_0 + nc_J[:, 1, 1] * lam_1
-                    corr_xyz[update_idx, 2] -= nc_J[:, 0, 2] * lam_0 + nc_J[:, 1, 2] * lam_1
-                    
-                    corr_active[update_idx[~vdet]] = False  # Deactivate singular lines
-            
+                if not np.any(not_conv):
+                    break
+
+                # Minimum Norm Pseudoinverse: Delta = J.T * (J * J.T)^-1 * vals
+                nc_J, nc_v = c_J[not_conv], c_v[not_conv]
+                nc_idx = active_corr_idx[not_conv]
+
+                JJT_00 = np.sum(nc_J[:, 0, :]**2, axis=1)
+                JJT_11 = np.sum(nc_J[:, 1, :]**2, axis=1)
+                JJT_01 = np.sum(nc_J[:, 0, :] * nc_J[:, 1, :], axis=1)
+
+                det = JJT_00 * JJT_11 - JJT_01**2
+                vdet = np.abs(det) > 1e-14
+                inv_det = np.where(vdet, 1.0 / np.where(vdet, det, 1.0), 0.0)
+
+                # Solve (J * J.T) * lambda = vals
+                lam_0 = ( JJT_11 * nc_v[:, 0] - JJT_01 * nc_v[:, 1]) * inv_det
+                lam_1 = (-JJT_01 * nc_v[:, 0] + JJT_00 * nc_v[:, 1]) * inv_det
+
+                # Update X = X - J.T * lambda (non-converged lines only)
+                corr_xyz[nc_idx, 0] -= nc_J[:, 0, 0] * lam_0 + nc_J[:, 1, 0] * lam_1
+                corr_xyz[nc_idx, 1] -= nc_J[:, 0, 1] * lam_0 + nc_J[:, 1, 1] * lam_1
+                corr_xyz[nc_idx, 2] -= nc_J[:, 0, 2] * lam_0 + nc_J[:, 1, 2] * lam_1
+
+                corr_active[nc_idx[~vdet]] = False  # Deactivate singular lines
+
+            # The last update inside the loop is never convergence-checked; check it here.
+            if np.any(corr_active):
+                idx = np.where(corr_active)[0]
+                f = self.engine.compute_cloud(
+                    corr_xyz[idx, 0], corr_xyz[idx, 1], corr_xyz[idx, 2], t=self.t, need_b=False
+                )
+                v, _ = val_jac_func(f.E, f.jacobian_E)
+                corr_success[idx[np.linalg.norm(v, axis=1) < value_tol]] = True
+
             # --- 3. Apply successful steps to global trajectory tracker ---
             active[valid_active_indices[~corr_success]] = False
             
@@ -578,10 +593,10 @@ class SingularityFinder:
         (S0, S1, S2, _), grad_S0, grad_S1, grad_S2 = self._stokes_and_grads_from_EJ(E, J)
         S0_safe = np.where(S0 > 1e-12, S0, 1.0)
         vals = np.stack([S1, S2], axis=-1) / S0_safe[:, None]
-        jac = np.stack([(S0 * grad_S1 - S1 * grad_S0).T / S0_safe**2, 
-                        (S0 * grad_S2 - S2 * grad_S0).T / S0_safe**2], axis=1)
-        return vals, jac
-
+        jac1 = ((S0 * grad_S1 - S1 * grad_S0) / S0_safe**2).T
+        jac2 = ((S0 * grad_S2 - S2 * grad_S0) / S0_safe**2).T
+        return vals, np.stack([jac1, jac2], axis=1)
+    
     def trace_stokes_C_lines(self, starting_points: list, ds: float = 0.05, max_steps: int = 500,
                              max_iter: int = 10, value_tol: float = 1e-6):
         """

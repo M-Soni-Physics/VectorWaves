@@ -215,6 +215,26 @@ def test_trace_stokes_C_lines():
         assert np.isclose(x, z, atol=1e-3)
         assert np.isclose(y, z, atol=1e-3)
 
+@pytest.mark.parametrize("seeds", [
+    [(0.0, 0.0, 0.0), (0.02, 0.0, 0.0)],
+    [(0.0, 0.0, 0.0), (0.02, 0.0, 0.0), (0.2, 0.2, 0.2)],
+    [(0.0, 0.0, 0.0), (0.02, 0.0, 0.0), (0.2, 0.2, 0.2), (-0.2, -0.2, -0.2)],
+])
+def test_trace_stokes_C_lines_multiple(seeds):
+    """Batched tracing with staggered corrector convergence (regression for M > 1)."""
+    engine = MockFieldEngine()
+    engine.mode = 'C'
+    finder = SingularityFinder(engine)
+
+    trajectories = finder.trace_stokes_C_lines(seeds, ds=0.05, max_steps=5)
+
+    assert len(trajectories) == len(seeds)
+    for traj in trajectories:
+        assert traj.shape[0] > 1
+        # Skip traj[0]: an off-line seed is stored as given, before any correction.
+        for x, y, z in traj[1:]:
+            assert np.isclose(x, z, atol=1e-3)
+            assert np.isclose(y, z, atol=1e-3)
 
 def test_trace_C_T_lines():
     engine = MockFieldEngine()
