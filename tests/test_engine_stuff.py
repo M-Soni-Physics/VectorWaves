@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 from vectorwaves.config_stuff import get_config
-from vectorwaves.beam_stuff import Beam
+from vectorwaves.beam_stuff import Beam, BeamMaker
 from vectorwaves.engine_stuff import FieldEngine, FieldResult
 
 @pytest.fixture
@@ -185,3 +185,39 @@ def test_field_engine_various_backends_and_progress(test_beam, engine_config):
         backend_name="numba", progress_bar=True
     )
     assert res_cloud.E.shape == (3, 2)
+
+# =========================================================================
+#                    3. INTEGRATION TESTS
+# =========================================================================
+
+def test_integration_power_conservation_across_modes():
+    """
+    Validates that the physical intensity of the beam at the origin remains 
+    invariant regardless of how densely the continuous angular spectrum is 
+    sampled (num_modes).
+    """
+    cfg = get_config()
+    cfg.source.randomize.off()
+    cfg.source.intensity_scale = 100.0
+    
+    # We need a finite beam profile, the default gaussian is perfect
+    cfg.source.k_space.gaussian(sigma_k_perp=1.0)
+    
+    # Generate and evaluate with N = 1000
+    cfg.source.num_modes = 1000
+    beam_low = BeamMaker(cfg).generate_beam()
+    engine_low = FieldEngine(beam_low, cfg)
+    res_low = engine_low.compute_point(0.0, 0.0, 0.0, backend_name="numpy")
+    
+    # Generate and evaluate with N = 5,000
+    cfg.source.num_modes = 5000
+    beam_high = BeamMaker(cfg).generate_beam()
+    engine_high = FieldEngine(beam_high, cfg)
+    res_high = engine_high.compute_point(0.0, 0.0, 0.0, backend_name="numpy")
+    
+    # Extract physical intensity |E|^2 at the origin
+    I_low = res_low.intensity_E
+    I_high = res_high.intensity_E
+    
+    # Assert they are the same physical field within 2%.
+    assert np.isclose(I_low, I_high, rtol=0.02)

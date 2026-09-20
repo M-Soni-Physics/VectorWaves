@@ -114,7 +114,9 @@ def decompose_in_basis(E1: np.ndarray, E2: np.ndarray, u: Union[Tuple[complex, c
     """
     u_arr = np.asarray(u, dtype=complex)
     norm = np.linalg.norm(u_arr)
-    u_hat = u_arr / norm if norm > 0 else u_arr
+    if norm == 0:
+        raise ValueError("Reference basis vector 'u' cannot be zero.")
+    u_hat = u_arr / norm
     
     # Construct orthogonal vector v_hat
     v_hat = np.array([-np.conj(u_hat[1]), np.conj(u_hat[0])], dtype=complex)

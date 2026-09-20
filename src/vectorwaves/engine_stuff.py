@@ -47,7 +47,7 @@ else:
     except ImportError:
         class tqdm:
             def __init__(self, *args, **kwargs): pass
-            def update(self, n): pass
+            def update(self, n=1): pass
             def close(self): pass
 
 @dataclass

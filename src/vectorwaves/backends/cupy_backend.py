@@ -107,10 +107,7 @@ class CupyMethods:
         num_comps = super_vec.shape[1]
         kernel = self._get_kernel(num_comps, is_grid=True)
 
-        # Pre-allocate the final CPU array to store results
         out_h = np.zeros((num_comps, ny, nx), dtype=np.complex128)
-
-        # Move the X vector to GPU once
         x_g = cp.asarray(x_vec, dtype=self.real_dt)
 
         # Target ~500MB maximum VRAM footprint for the output buffer
@@ -118,7 +115,6 @@ class CupyMethods:
         bytes_per_row = nx * num_comps * bytes_per_element
         MAX_VRAM_BYTES = 1000 * 1024 * 1024 # 1 GB
         
-        # Calculate how many rows we can safely process at once
         rows_per_batch = max(1, MAX_VRAM_BYTES // bytes_per_row)
 
         for i in range(0, ny, rows_per_batch):
@@ -126,10 +122,7 @@ class CupyMethods:
             cur_ny = end - i
             cur_pts = nx * cur_ny
 
-            # Move just this chunk of Y coordinates to GPU
             y_g = cp.asarray(y_vec[i:end], dtype=self.real_dt)
-            
-            # Allocate GPU buffer for just this batch
             out_g = cp.empty((num_comps, cur_pts), dtype=self.comp_dt)
 
             threads = 256
@@ -141,18 +134,16 @@ class CupyMethods:
                 self.real_dt(z), self.real_dt(t), cp.int32(nx), cp.int32(cur_pts), cp.int32(self.num_waves)
             ))
 
-            # Fetch result to CPU and reshape directly into the pre-allocated CPU array
             out_h[:, i:end, :] = out_g.get().reshape(num_comps, cur_ny, nx)
             
             if progress_callback: 
                 progress_callback(cur_ny)
     
-        # Unpack the CPU array into standard shapes
         E = out_h[0:3]
         idx = 3
         B = out_h[idx:idx+3] if need_b else None
         if need_b: idx += 3
-        D = (out_h[idx:idx+3], out_h[idx+3:idx+6], out_h[idx+6:idx+9]) if need_derivs else (None,None,None)
+        D = (out_h[idx:idx+3], out_h[idx+3:idx+6], out_h[idx+6:idx+9]) if need_derivs else (None, None, None)
         
         return E, D, B
         
@@ -162,36 +153,37 @@ class CupyMethods:
         num_comps = super_vec.shape[1]
         kernel = self._get_kernel(num_comps, is_grid=False)
 
-        E_h, B_h, dx_h, dy_h, dz_h = self._allocate_cpu_arrays((num_pts,))
+        # Dynamic allocation matching compute_grid to save host memory
+        out_h = np.zeros((num_comps, num_pts), dtype=np.complex128)
         CHUNK = 500_000
 
         for s in range(0, num_pts, CHUNK):
             e = min(s + CHUNK, num_pts)
             cur_n = e - s
-            x_g, y_g, z_g = [cp.asarray(arr[s:e], dtype=self.real_dt) for arr in [x,y,z]]
+            x_g, y_g, z_g = [cp.asarray(arr[s:e], dtype=self.real_dt) for arr in [x, y, z]]
             out_g = cp.empty((num_comps, cur_n), dtype=self.comp_dt)
 
-            kernel(((cur_n+255)//256,), (256,), (
+            # Fixed argument packing for single precision
+            kernel(((cur_n + 255) // 256,), (256,), (
                 x_g, y_g, z_g, self.kx, self.ky, self.kz, self.w, 
-                super_vec, out_g, 0.0, self.real_dt(t), 0, cp.int32(cur_n), cp.int32(self.num_waves)
+                super_vec, out_g, 
+                self.real_dt(0.0), self.real_dt(t), cp.int32(0), cp.int32(cur_n), cp.int32(self.num_waves)
             ))
 
-            out_c = out_g.get()
+            out_h[:, s:e] = out_g.get()
             if progress_callback: progress_callback(cur_n)
-            E_h[:, s:e] = out_c[0:3]
-            idx = 3
-            if need_b: B_h[:, s:e] = out_c[idx:idx+3]; idx += 3
-            if need_derivs:
-                dx_h[:, s:e], dy_h[:, s:e], dz_h[:, s:e] = out_c[idx:idx+3], out_c[idx+3:idx+6], out_c[idx+6:idx+9]
-        
-        return E_h, (dx_h, dy_h, dz_h) if need_derivs else (None,None,None), B_h if need_b else None
 
-    def _allocate_cpu_arrays(self, shape):
-        return tuple(np.zeros((3, *shape), dtype=np.complex128) for _ in range(5))
+        E = out_h[0:3]
+        idx = 3
+        B = out_h[idx:idx+3] if need_b else None
+        if need_b: idx += 3
+        D = (out_h[idx:idx+3], out_h[idx+3:idx+6], out_h[idx+6:idx+9]) if need_derivs else (None, None, None)
+
+        return E, D, B
 
     def compute_point(self, x, y, z, t, need_b=True, need_derivs=True):
         E, D, B = self.compute_cloud(np.array([x]), np.array([y]), np.array([z]), t, need_b, need_derivs)
-        return E[:,0], (tuple(d[:,0] for d in D) if need_derivs else (None,None,None)), (B[:,0] if need_b else None) # type: ignore
+        return E[:, 0], (tuple(d[:, 0] for d in D) if need_derivs else (None, None, None)), (B[:, 0] if need_b else None)
     
     def __del__(self):
         self._kernel_cache.clear()

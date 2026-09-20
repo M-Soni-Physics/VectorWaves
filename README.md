@@ -26,6 +26,11 @@ To install,
 pip install vectorwaves[#Extra]
 ```
 
+#### GPU Support Note:
+The default `pip install vectorwaves[gpu]` targets CUDA 12.
+- If your machine runs CUDA 11.x, install `pip install cupy-cuda11x` instead.  
+- If you experience driver initialization issues, ensure your NVIDIA driver supports the CUDA version installed. VectorWaves only requires the CUDA runtime compiler (NVRTC) and Driver API.
+
 ## Features
 
 - **Exact 3D Fields**: Electric, Magnetic fields and spatial derivatives via Fibonacci-sphere discrete plane-wave expansions.

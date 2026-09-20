@@ -140,7 +140,6 @@ class KSpaceSpectra:
         vortex = np.exp(1j * l * phi)
     
         res = (radial * poly_val * gaussian_env * vortex).astype(complex)
-        res = np.where(k_perp_sq == 0, 0j, res)
         return res.item() if res.ndim == 0 else res    
     
     @staticmethod

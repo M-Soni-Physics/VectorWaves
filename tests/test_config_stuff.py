@@ -175,7 +175,10 @@ def test_source_wavelength_array():
 
     with pytest.raises(ValueError, match="All wavelengths must be > 0"):
         SourceConfig(wavelength=[0.5, -0.6])
-        
+ 
+    with pytest.raises(ValueError, match="cannot be empty"):
+        SourceConfig(wavelength=[])
+       
 def test_source_config_limits_and_types():
     with pytest.raises(ValueError, match="intensity_scale must be > 0"):
         SourceConfig(intensity_scale=-1.0)
@@ -329,6 +332,10 @@ def test_internal_helpers_edge_cases():
     
     with pytest.raises(ValueError, match="finite number"):
         _check_scalar(np.inf, "test", float)
+    with pytest.raises(ValueError, match="finite number"):
+        _check_scalar(complex(np.inf, 1), "test_complex", complex, allow_complex=True)
+    with pytest.raises(ValueError, match="finite number"):
+        _check_scalar(complex(1, np.nan), "test_complex", complex, allow_complex=True)
         
     with pytest.raises(TypeError, match="Expected float, got complex"):
         _check_scalar(1+2j, "test", float, allow_complex=False)

@@ -110,22 +110,19 @@ def _kernel_point(x, y, z, t, kx, ky, kz, cx, cy, cz, w, inv_w, need_b, need_der
 
     E = np.array([ex, ey, ez], dtype=np.complex128)
     
-    B = np.empty(3, dtype=np.complex128)
+    B = None
     if need_b:
         bx = np.sum(((ky * cz - kz * cy) * inv_w) * wf)
         by = np.sum(((kz * cx - kx * cz) * inv_w) * wf)
         bz = np.sum(((kx * cy - ky * cx) * inv_w) * wf)
-        B[:] = [bx, by, bz]
+        B = np.array([bx, by, bz], dtype=np.complex128)
 
-    dx = np.empty(3, dtype=np.complex128)
-    dy = np.empty(3, dtype=np.complex128)
-    dz = np.empty(3, dtype=np.complex128)
-    
+    dx = dy = dz = None
     if need_derivs:
         ikx, iky, ikz = 1j*kx, 1j*ky, 1j*kz
-        dx[:] = [np.sum(ikx*cx*wf), np.sum(ikx*cy*wf), np.sum(ikx*cz*wf)]
-        dy[:] = [np.sum(iky*cx*wf), np.sum(iky*cy*wf), np.sum(iky*cz*wf)]
-        dz[:] = [np.sum(ikz*cx*wf), np.sum(ikz*cy*wf), np.sum(ikz*cz*wf)]
+        dx = np.array([np.sum(ikx*cx*wf), np.sum(ikx*cy*wf), np.sum(ikx*cz*wf)], dtype=np.complex128)
+        dy = np.array([np.sum(iky*cx*wf), np.sum(iky*cy*wf), np.sum(iky*cz*wf)], dtype=np.complex128)
+        dz = np.array([np.sum(ikz*cx*wf), np.sum(ikz*cy*wf), np.sum(ikz*cz*wf)], dtype=np.complex128)
 
     return E, (dx, dy, dz), B
 
@@ -136,8 +133,18 @@ class NumpyMethods:
         self.w, self.inv_w = beam.w, beam.inv_w
         self.max_batch_size = max_points_per_batch
 
-    def _allocate_arrays(self, shape):
-        return tuple(np.zeros((3,*shape), dtype=np.complex128) for _ in range(5))
+    def _allocate_arrays(self, shape, need_b, need_derivs):
+        E = np.zeros((3, *shape), dtype=np.complex128)
+        B = np.zeros((3, *shape), dtype=np.complex128) if need_b else None
+        
+        if need_derivs:
+            dx = np.zeros((3, *shape), dtype=np.complex128)
+            dy = np.zeros((3, *shape), dtype=np.complex128)
+            dz = np.zeros((3, *shape), dtype=np.complex128)
+        else:
+            dx = dy = dz = None
+            
+        return E, B, dx, dy, dz
         
     def compute_cloud(self, x, y, z, t, need_b=True, need_derivs=True, progress_callback=None):
         total_points = len(x)
@@ -145,7 +152,7 @@ class NumpyMethods:
         if progress_callback: 
             batch_size = min(self.max_batch_size, max(1, total_points // 5))
 
-        E, B, dx, dy, dz = self._allocate_arrays((total_points,))
+        E, B, dx, dy, dz = self._allocate_arrays((total_points,), need_b, need_derivs)
         
         for i in range(0, total_points, batch_size):
             end = min(i + batch_size, total_points)
@@ -153,20 +160,21 @@ class NumpyMethods:
                 x[i:end], y[i:end], z[i:end], t, 
                 self.kx, self.ky, self.kz, self.cx, self.cy, self.cz, self.w, self.inv_w, 
                 need_b, need_derivs, 
-                E[:][:, i:end], B[:][:, i:end], dx[:][:, i:end], dy[:][:, i:end], dz[:][:, i:end]
+                E[:, i:end], 
+                B[:, i:end] if need_b else None, 
+                dx[:, i:end] if need_derivs else None, 
+                dy[:, i:end] if need_derivs else None, 
+                dz[:, i:end] if need_derivs else None
             )
             if progress_callback: progress_callback(end-i)
-            
-        D = (dx, dy, dz) if need_derivs else (None, None, None)
-        B = B if need_b else None
 
-        return E, D, B
+        return E, (dx, dy, dz), B
 
     def compute_grid(self, x_vec, y_vec, z, t, need_b=True, need_derivs=True, progress_callback=None):
         nx, ny = len(x_vec), len(y_vec)
         rows_per_batch = max(1, self.max_batch_size // nx)
         
-        E, B, dx, dy, dz = self._allocate_arrays((ny, nx))
+        E, B, dx, dy, dz = self._allocate_arrays((ny, nx), need_b, need_derivs)
         
         for i in range(0, ny, rows_per_batch):
             end = min(i + rows_per_batch, ny)
@@ -174,20 +182,18 @@ class NumpyMethods:
                 x_vec, y_vec[i:end], z, t, 
                 self.kx, self.ky, self.kz, self.cx, self.cy, self.cz, self.w, self.inv_w, 
                 need_b, need_derivs, 
-                E[:][:, i:end, :], B[:][:, i:end, :], dx[:][:, i:end, :], dy[:][:, i:end, :], dz[:][:, i:end, :]
+                E[:, i:end, :], 
+                B[:, i:end, :] if need_b else None, 
+                dx[:, i:end, :] if need_derivs else None, 
+                dy[:, i:end, :] if need_derivs else None, 
+                dz[:, i:end, :] if need_derivs else None
             )
             if progress_callback: progress_callback(end - i) 
             
-        D = (dx, dy, dz) if need_derivs else (None, None, None)
-        B = B if need_b else None
-
-        return E, D, B
+        return E, (dx, dy, dz), B
     
     def compute_point(self, x, y, z, t, need_b=True, need_derivs=True):
-        E, D, B = _kernel_point(
+        return _kernel_point(
             x, y, z, t, self.kx, self.ky, self.kz, self.cx, self.cy, self.cz, 
             self.w, self.inv_w, need_b, need_derivs
         )
-        if not need_derivs: D = (None, None, None)
-        if not need_b: B = None
-        return E, D, B

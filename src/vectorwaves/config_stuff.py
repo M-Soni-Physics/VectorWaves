@@ -43,7 +43,7 @@ def _check_scalar(val: Any, name: str, dtype: Type, allow_complex: bool = False)
     except (ValueError, TypeError):
         raise TypeError(f"Config Error ['{name}']: Cannot convert {type(val).__name__} to {dtype.__name__}")
 
-    if isinstance(casted, (float, np.floating)) and not np.isfinite(casted):
+    if isinstance(casted, (float, np.floating, complex, np.complexfloating)) and not np.isfinite(casted):
         raise ValueError(f"Config Error ['{name}']: Must be a finite number, got '{casted}'")
 
     return casted
@@ -445,8 +445,7 @@ class KSpaceConfig(SerializableConfig):
         Notes
         -----
         The provided function `fn` will be tested with a dummy wavevector 
-        array (np.random.randn(3, 2) if vectorised else np.random.randn(3)) 
-        to validate its return type and shape.
+        to validate its return type and shape. 
         """
         self.profile = fn
         self.params = params
@@ -457,7 +456,7 @@ class KSpaceConfig(SerializableConfig):
     def validate(self):
         if getattr(self.profile, '__name__', '') == 'custom_callable_fail': return
         try:
-            test_k = np.random.randn(3, 2) if self.vectorised else np.random.randn(3)
+            test_k = np.array([[0.1, -0.1], [0.1, 0.1], [0.9, 0.9]]) if self.vectorised else np.array([0.1, 0.1, 0.9])
             res = self.profile(test_k, **self.params)
             if self.vectorised and (not hasattr(res, "__len__") or len(res) != 2): 
                 raise ValueError("Vectorised function must return an array matching input shape.")
@@ -638,6 +637,8 @@ class SourceConfig(SerializableConfig):
             if self.wavelength <= 0: raise ValueError("Wavelength must be > 0")
         else:
             if isinstance(self.wavelength, (np.ndarray, list, tuple)):
+                if len(self.wavelength) == 0:
+                    raise ValueError("source.wavelength cannot be empty")
                 self.wavelength =[_check_scalar(w, "source.wavelength", float) for w in self.wavelength]
                 if any(w <= 0 for w in self.wavelength): raise ValueError("All wavelengths must be > 0")
             else:

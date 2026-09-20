@@ -52,17 +52,29 @@ def test_kspace_tophat():
 def test_kspace_laguerre_gauss_branches():
     sigma = 1.0
     
-    # 1. Test 1D fallback (`size == 1` branch)
+    # 1. Test 1D fallback (`ndim == 0` scalar return branch)
     k_1d = np.array([1.0, 0.0, 1.0])
     res_1d = KSpaceSpectra.laguerre_gauss(k_1d, p=0, l=1, sigma_k_perp=sigma)
     assert isinstance(res_1d, (complex, np.complexfloating))
     
-    # 2. Test Origin division-by-zero handling (`np.where(k_perp_sq == 0)` branch)
+    # 2. Test Origin behavior for l != 0 (vortex core must be 0) vs l == 0 (center peak must be 1.0)
     k_origin = np.array([
-        [0.0], [0.0], [1.0]
+        [0.0], 
+        [0.0], 
+        [1.0]
     ])
-    res_origin = KSpaceSpectra.laguerre_gauss(k_origin, p=0, l=1, sigma_k_perp=sigma)
-    assert res_origin[0] == 0j
+    
+    # Vortex mode (l=1): origin must be zero
+    res_vortex_origin = KSpaceSpectra.laguerre_gauss(k_origin, p=0, l=1, sigma_k_perp=sigma)
+    assert res_vortex_origin[0] == 0j
+
+    # Gaussian mode (l=0, p=0): origin must be 1.0
+    res_gaussian_origin = KSpaceSpectra.laguerre_gauss(k_origin, p=0, l=0, sigma_k_perp=sigma)
+    assert res_gaussian_origin[0] == 1.0 + 0j
+
+    # High radial mode (l=0, p=2): origin must also be 1.0
+    res_p2_origin = KSpaceSpectra.laguerre_gauss(k_origin, p=2, l=0, sigma_k_perp=sigma)
+    assert res_p2_origin[0] == 1.0 + 0j
 
     # 3. Test Vectorized valid output
     k_vec = np.array([
