@@ -1,3 +1,7 @@
+# VectorWaves
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21762335.svg)](https://doi.org/10.5281/zenodo.21762335)
+
 VectorWaves provides a framework for generating, computing, and analyzing fully three-dimensional electromagnetic fields and their topology through discrete plane-wave expansions.
 
 ## Installation
@@ -49,3 +53,17 @@ beam.plot_kspace_3d(plot_type='matplotlib_scatter')
 ![LG beam k-space](https://github.com/M-Soni-Physics/VectorWaves/blob/main/docs/images/LG_kspace.png?raw=true)
 
 For tutorials and examples, please refer to the [official documentation](https://M-Soni-Physics.github.io/VectorWaves). Source code is available on [GitHub](https://github.com/M-Soni-Physics/VectorWaves/).
+
+## Citing
+
+If you use VectorWaves in your research, please cite it:
+
+​```bibtex
+@software{soni_vectorwaves,
+  author  = {Soni, Mayank},
+  title   = {VectorWaves},
+  year    = {2026},
+  doi     = {10.5281/zenodo.21762335},
+  url     = {https://github.com/M-Soni-Physics/VectorWaves}
+}
+​```

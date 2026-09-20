@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "VectorWaves"
+type: software
+version: "1.0.1"
+date-released: "2026-09-20"
+doi: "10.5281/zenodo.21762335"
+authors:
+  - family-names: Soni
+    given-names: Mayank
+repository-code: "https://github.com/M-Soni-Physics/VectorWaves"
+url: "https://github.com/M-Soni-Physics/VectorWaves"
+license: MIT
+abstract: "Three-dimensional electromagnetic field simulation and topology analysis."
+keywords:
+  - electromagnetic fields
+  - singularities
+  - wavefield simulation
+  - physics

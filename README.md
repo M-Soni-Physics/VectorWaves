@@ -1,5 +1,7 @@
 # VectorWaves
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21762335.svg)](https://doi.org/10.5281/zenodo.21762335)
+
 A Python library for constructing and analyzing electromagnetic fields through discrete plane-wave expansions.
 
 Classical light is fundamentally an electromagnetic wave. In vacuum, electromagnetic fields admit a plane-wave decomposition, and VectorWaves provides a framework for constructing, computing, and analyzing fully three-dimensional vector fields and their topological structures.
@@ -91,3 +93,19 @@ For a gentler introduction covering basic configurations, spectral envelopes, or
 ## Contributing
 
 Contributions, bug reports, and feature requests are welcome! If you want to contribute or set up VectorWaves locally for testing, please see the [Contributing Guide](CONTRIBUTING.md).
+
+## Citing
+
+If you use VectorWaves in your research, please cite it:
+
+​```bibtex
+@software{soni_vectorwaves,
+  author  = {Soni, Mayank},
+  title   = {VectorWaves},
+  year    = {2026},
+  doi     = {10.5281/zenodo.21762335},
+  url     = {https://github.com/M-Soni-Physics/VectorWaves}
+}
+​```
+
+GitHub's "Cite this repository" button also reads `CITATION.cff`.
