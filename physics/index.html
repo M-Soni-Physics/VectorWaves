@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -27,7 +27,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-discrete-plane-wave-expansions" class="md-skip">
+        <a href="#methods-conventions-and-polarization-topology" class="md-skip">
           Skip to content
         </a>
       
@@ -168,7 +168,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/1Rayokelvin/VectorWaves" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/M-Soni-Physics/VectorWaves" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -307,7 +307,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/1Rayokelvin/VectorWaves" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/M-Soni-Physics/VectorWaves" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -646,6 +646,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -688,6 +690,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -708,10 +712,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#power-normalization-and-intensity-scale" class="md-nav__link">
+  <a href="#angular-spectrum-and-power-normalization" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Power Normalization and Intensity Scale
+        Angular-spectrum and power normalization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polarization-transport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Polarization Transport
       
     </span>
   </a>
@@ -724,44 +739,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-polarization-transport" class="md-nav__link">
+  <a href="#2-conventions-and-units" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Polarization Transport
+        2. Conventions and Units
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-conventions-units" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Conventions &amp; Units
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-polarization-topology-singularities" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Polarization Topology &amp; Singularities
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Polarization Topology &amp; Singularities">
+    <nav class="md-nav" aria-label="2. Conventions and Units">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#stokes-projections" class="md-nav__link">
+  <a href="#units-and-phase" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Stokes Projections
+        Units and phase
       
     </span>
   </a>
@@ -769,10 +762,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#singularity-refinement" class="md-nav__link">
+  <a href="#coordinate-conventions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Singularity Refinement
+        Coordinate conventions
       
     </span>
   </a>
@@ -780,10 +773,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#a-note-on-tolerances" class="md-nav__link">
+  <a href="#jacobian-convention" class="md-nav__link">
     <span class="md-ellipsis">
       
-        A Note on Tolerances
+        Jacobian convention
       
     </span>
   </a>
@@ -791,10 +784,188 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#line-tracing" class="md-nav__link">
+  <a href="#stokes-convention" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Line Tracing
+        Stokes convention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-polarization-singularities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Polarization Singularities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Polarization Singularities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ct-points-true-3d-circular-polarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(C^T\)-points: true 3D circular polarization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lt-points-true-3d-linear-polarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(L^T\)-points: true 3D linear polarization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stokes-c-points-transverse-polarization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stokes C-points : transverse polarization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stokes C-points : transverse polarization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#morphological-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Morphological Classification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-numerical-detection-of-singularities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Numerical Detection of Singularities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Numerical Detection of Singularities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#candidate-extraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Candidate extraction
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batched-newton-refinement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batched Newton refinement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spatial-deduplication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spatial deduplication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dimensional-and-dimensionless-tolerances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dimensional and Dimensionless Tolerances
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-3d-singularity-line-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 3D Singularity-Line Tracing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 3D Singularity-Line Tracing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#predictor-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predictor step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#corrector-step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Corrector step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lt-line-tracing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(L^T\)-line tracing
       
     </span>
   </a>
@@ -834,72 +1005,342 @@
   
 
 
-  <h1>Physics Details</h1>
-
-<p>This page details the core methods, conventions, and topological concepts utilized in VectorWaves.</p>
+<h1 id="methods-conventions-and-polarization-topology">Methods, Conventions, and Polarization Topology</h1>
+<p>This page details the core numerical methods, conventions, and topological concepts utilized in VectorWaves.</p>
 <h2 id="1-discrete-plane-wave-expansions">1. Discrete Plane-Wave Expansions</h2>
-<p>VectorWaves constructs fields through the superposition of plane waves. To sample the angular spectrum efficiently and without bias, <code>BeamMaker</code> samples wavevectors over the source's solid angle using a <strong>Fibonacci-sphere quadrature</strong>.</p>
-<p>This approach provides near-uniform angular density across the sphere, avoiding the polar clustering issues associated with a standard latitude/longitude grid. The accuracy of any computed field quantity scales with <code>config.source.num_modes</code>. For typical simulations, a few thousand modes are sufficient with proper tuning of source's solid angle i.e. <code>config.source.theta_max</code>.</p>
-<h3 id="power-normalization-and-intensity-scale">Power Normalization and Intensity Scale</h3>
-<p>Modes are constructed such that <code>sum(mode_irradiances) = 1</code> for a unit-amplitude source. The <code>config.source.intensity_scale</code> enters as <code>sqrt(intensity_scale)</code> on the amplitude, meaning total power scales linearly. </p>
-<p>For polychromatic fields, spectral profile weights are L2-normalized before scaling, ensuring total power is preserved across different spectral shapes. For amplitude randomization (<code>randomize.amplitude</code>), each mode's amplitude is multiplied by a unit-variance complex Gaussian draw scaled by <code>1/sqrt(2)</code>. This preserves expected total power while successfully introducing speckle statistics.</p>
-<p><em>(Note: <code>intensity_E</code> is a real-space quantity representing the squared field magnitude evaluated point by point, carrying the power normalization set during beam construction.)</em></p>
-<h2 id="2-polarization-transport">2. Polarization Transport</h2>
-<p>To ensure that the polarization of each plane-wave mode is physically consistent with the overall beam, VectorWaves utilizes <strong>Rodrigues rotation</strong> for polarization transport.</p>
-<p>The user defines a base Jones vector, <code>config.source.pol_vect = (px, py)</code>, relative to the macroscopic propagation axis <code>config.source.beam_axis</code>. <code>BeamMaker</code> then carries this vector to each individual plane-wave mode via a Rodrigues rotation that maps the beam axis unit vector to the specific mode's wavevector <code>k_hat</code>. This is done for a geometrically determined polarization state.</p>
-<h2 id="3-conventions-units">3. Conventions &amp; Units</h2>
+<p>VectorWaves constructs arbitrary non-paraxial fields through the superposition of plane waves. The continuous angular spectrum is discretized over the source's solid angle using a <strong>Fibonacci-sphere quadrature</strong>.</p>
+<p>The Fibonacci construction provides near-uniform angular sampling over the spherical cap, avoiding the polar clustering associated with conventional latitude/longitude grids. Each sampled direction <span class="arithmatex">\(\hat{\mathbf{k}}_n\)</span> is associated with a solid-angle element <span class="arithmatex">\(\Delta\Omega_n\)</span>, so the discrete expansion approximates the corresponding angular-spectrum integral as the number of modes is increased.</p>
+<p>The number of modes is controlled by <code>config.source.num_modes</code>, while the sampled solid angle is controlled by <code>config.source.theta_max</code>. Increasing the number of modes improves the angular discretization, with the required resolution depending on the angular spectrum and the spatial structure being computed.</p>
+<h3 id="angular-spectrum-and-power-normalization">Angular-spectrum and power normalization</h3>
+<p>For a monochromatic wavelength, the wavevectors are</p>
+<div class="arithmatex">\[
+\mathbf{k}_n = \frac{2\pi}{\lambda}\hat{\mathbf{k}}_n.
+\]</div>
+<p>The user-specified k-space profile produces a complex amplitude <span class="arithmatex">\(A_n\)</span> for each sampled direction. Before the discrete modes are constructed, the raw angular-spectrum power is evaluated as</p>
+<div class="arithmatex">\[
+P_{\mathrm{raw}}
+=
+\sum_n |A_n|^2\,\Delta\Omega_n.
+\]</div>
+<p>The spectrum is then normalized by <span class="arithmatex">\(1/\sqrt{P_{\mathrm{raw}}}\)</span>, with the solid-angle factor <span class="arithmatex">\(\Delta\Omega_n\)</span> included in the resulting discrete mode coefficient. Thus the discrete expansion retains the weighting associated with the underlying solid-angle integral rather than treating the sampled directions as an unweighted list of plane waves.</p>
+<p>The source <code>intensity_scale</code> enters through the overall amplitude normalization as</p>
+<div class="arithmatex">\[
+E \propto \sqrt{\text{intensity\_scale}},
+\]</div>
+<p>so field intensities and power-like quantities scale linearly with <code>intensity_scale</code>.</p>
+<p>For polychromatic fields, the spectral-line weights are normalized in <span class="arithmatex">\(L^2\)</span> before the overall source scaling is applied. This keeps the total spectral weighting normalized independently of the particular shape of the spectral profile.</p>
+<p>When <code>randomize.amplitude</code> is enabled, each mode amplitude is multiplied by</p>
+<div class="arithmatex">\[
+\frac{1}{\sqrt{2}}
+\left(X+iY\right),
+\qquad
+X,Y\sim\mathcal N(0,1),
+\]</div>
+<p>giving a zero-mean complex Gaussian random variable with unit variance. This preserves the expected ensemble power of the normalized spectrum while producing fully developed speckle statistics.</p>
+<p><code>intensity_E</code> is a real-space scalar representing the point-by-point squared electric-field magnitude,</p>
+<div class="arithmatex">\[
+\text{intensity\_E}(\mathbf r) = |\mathbf E(\mathbf r)|^2.
+\]</div>
+<h3 id="polarization-transport">Polarization Transport</h3>
+<p>Each plane-wave electric field must satisfy Maxwell's transversality condition,</p>
+<div class="arithmatex">\[
+\mathbf{k}_n\cdot\mathbf{E}_n=0.
+\]</div>
+<p>The user specifies a base Jones vector</p>
+<pre><code class="language-text">config.source.pol_vect = (px, py)
+</code></pre>
+<p>relative to the macroscopic propagation direction <code>config.source.beam_axis</code>.</p>
+<p>For each sampled direction <span class="arithmatex">\(\hat{\mathbf{k}}_n\)</span>, VectorWaves constructs a local transverse basis using a Rodrigues rotation that transports the reference transverse frame from the beam axis to <span class="arithmatex">\(\hat{\mathbf{k}}_n\)</span>. The Jones components are then expressed in this local basis, ensuring that the resulting polarization vector is transverse to the corresponding wavevector.</p>
+<p>In the absence of polarization randomization, the mode polarization has the form</p>
+<div class="arithmatex">\[
+\mathbf P_n = p_x\mathbf e_{1,n}+p_y\mathbf e_{2,n},
+\]</div>
+<p>where <span class="arithmatex">\(\mathbf e_{1,n}\)</span> and <span class="arithmatex">\(\mathbf e_{2,n}\)</span> span the plane perpendicular to <span class="arithmatex">\(\hat{\mathbf{k}}_n\)</span>.</p>
+<p>Optional polarization-state and polarization-angle randomization are applied independently to these local transverse frames.</p>
+<hr />
+<h2 id="2-conventions-and-units">2. Conventions and Units</h2>
+<h3 id="units-and-phase">Units and phase</h3>
+<p>VectorWaves uses natural units with</p>
+<div class="arithmatex">\[
+c=1.
+\]</div>
+<p>The phase of the <span class="arithmatex">\(n\)</span>-th plane-wave mode is</p>
+<div class="arithmatex">\[
+\phi_n(\mathbf r,t)
+=
+\mathbf k_n\cdot\mathbf r-\omega_n t.
+\]</div>
+<p>Consequently, time is expressed in units of length, equivalent to <span class="arithmatex">\(ct\)</span> in SI units.</p>
+<p>The stored wavenumber has units</p>
+<div class="arithmatex">\[
+k\;[\mathrm{rad}/\mathrm{spatial\_unit}],
+\]</div>
+<p>where the spatial unit is determined by <code>op.size</code> and <code>op.spacing</code>.</p>
+<h3 id="coordinate-conventions">Coordinate conventions</h3>
+<p>The default macroscopic propagation axis is <span class="arithmatex">\(+z\)</span>.</p>
+<p><code>compute_on_op</code> evaluates the field on a transverse <span class="arithmatex">\((x,y)\)</span> plane at a specified <span class="arithmatex">\(z\)</span>.</p>
+<p><code>compute_point</code> evaluates the field at a single arbitrary 3D spatial point.</p>
+<p><code>compute_cloud</code> evaluates the field at an arbitrary one-dimensional collection of 3D points. No spatial connectivity or regular-grid structure is assumed; the points constitute an unstructured point cloud.</p>
+<h3 id="jacobian-convention">Jacobian convention</h3>
+<p>Spatial derivatives use the tensor convention</p>
+<div class="arithmatex">\[
+\texttt{jacobian\_E}[i,j,\ldots]
+=
+\frac{\partial E_i}{\partial x_j}.
+\]</div>
+<p>The first index identifies the field component <span class="arithmatex">\((x,y,z)\)</span>, while the second identifies the spatial derivative direction <span class="arithmatex">\((x,y,z)\)</span>.</p>
+<p>The divergence is the trace,</p>
+<div class="arithmatex">\[
+\nabla\cdot\mathbf E
+=
+\operatorname{tr}(\nabla\mathbf E),
+\]</div>
+<p>while the curl is obtained from the antisymmetric part of the spatial Jacobian.</p>
+<h3 id="stokes-convention">Stokes convention</h3>
+<p>The polarization state can be characterized using the Stokes parameters. In particular, <span class="arithmatex">\(S_3\)</span> determines the circular-polarization component according to the convention used by VectorWaves.</p>
+<p>The sign convention is exposed directly through <span class="arithmatex">\(S_3\)</span>, so the absolute naming of <span class="arithmatex">\(S_3=\pm1\)</span> as LCP or RCP is less important than maintaining the same convention consistently throughout the polarization and singularity calculations.</p>
+<hr />
+<h2 id="3-polarization-singularities">3. Polarization Singularities</h2>
+<p>In a general 3D electromagnetic field, the polarization ellipse need not lie in the transverse <span class="arithmatex">\(xy\)</span>-plane.</p>
+<p>For a complex electric field</p>
+<div class="arithmatex">\[
+\mathbf E
+=
+\operatorname{Re}(\mathbf E)
++
+i\,\operatorname{Im}(\mathbf E),
+\]</div>
+<p>the real and imaginary parts span the plane of polarization. Its oriented area vector is</p>
+<div class="arithmatex">\[
+\mathbf N
+=
+\operatorname{Re}(\mathbf E)
+\times
+\operatorname{Im}(\mathbf E).
+\]</div>
+<h3 id="ct-points-true-3d-circular-polarization"><span class="arithmatex">\(C^T\)</span>-points: true 3D circular polarization</h3>
+<p>A <span class="arithmatex">\(C^T\)</span>-point satisfies</p>
+<p>$$
+\mathbf E\cdot\mathbf E=0 
+\implies \operatorname{Re}(\mathbf E\cdot\mathbf E)=0,
+\operatorname{Im}(\mathbf E\cdot\mathbf E)=0.</p>
+<p>$$</p>
+<p>where the dot product is the complex bilinear dot product, with no complex conjugation. At such a point, the two semi-axes of the 3D polarization ellipse have equal magnitude, so the ellipse becomes a circle in its own polarization plane.</p>
+<p><span class="arithmatex">\(C^T\)</span>-points are located using <code>find_C_T_points</code>.</p>
+<h3 id="lt-points-true-3d-linear-polarization"><span class="arithmatex">\(L^T\)</span>-points: true 3D linear polarization</h3>
+<p>An <span class="arithmatex">\(L^T\)</span>-point satisfies</p>
+<div class="arithmatex">\[
+\operatorname{Re}(\mathbf E)
+\times
+\operatorname{Im}(\mathbf E)
+=
+\mathbf 0.
+\]</div>
+<p>The area vector of the polarization ellipse therefore vanishes, and the ellipse collapses to a line.</p>
+<p><span class="arithmatex">\(L^T\)</span>-points are located using <code>find_L_T_points</code>.</p>
+<p>Although this condition contains three scalar components, they are not independent. The vectors <span class="arithmatex">\(\operatorname{Re}(\mathbf E)\)</span>, <span class="arithmatex">\(\operatorname{Im}(\mathbf E)\)</span>, and their cross product are mutually orthogonal, so the three components of <span class="arithmatex">\(\mathbf N\)</span> do not represent three independent constraints for the purpose of locating a zero in a two-dimensional plane. VectorWaves therefore treats <span class="arithmatex">\(L^T\)</span>-point refinement as a nonlinear least-squares problem and minimizes <span class="arithmatex">\(\|\mathbf N\|^2\)</span> using Gauss-Newton.</p>
+<h3 id="stokes-c-points-transverse-polarization">Stokes C-points : transverse polarization</h3>
+<p>A conventional Stokes C-point is defined from the transverse polarization state. VectorWaves locates these points using</p>
+<div class="arithmatex">\[
+s_1=s_2=0.
+\]</div>
+<p>For the transverse field <span class="arithmatex">\((E_x,E_y)\)</span>, this is equivalently expressed as</p>
+<div class="arithmatex">\[
+E_x^2+E_y^2=0 \implies
+\operatorname{Re}(E_x^2+E_y^2)=0,
+\operatorname{Im}(E_x^2+E_y^2)=0.
+\]</div>
+<p>The longitudinal component <span class="arithmatex">\(E_z\)</span> is not included in this condition. Stokes C-points are located using <code>find_stokes_C_points</code>.</p>
+<h4 id="morphological-classification">Morphological Classification</h4>
+<p>Stokes C-points possess a local morphology determined by the orientation field of the polarization ellipse's major axis.</p>
+<p>The Poincaré index of a C-point is</p>
+<div class="arithmatex">\[
+I_C
+=
+\frac12\,\operatorname{sgn}(D_I),
+\]</div>
+<p>where</p>
+<div class="arithmatex">\[
+D_I
+=
+\frac{\partial S_1}{\partial x}
+\frac{\partial S_2}{\partial y}
+-
+\frac{\partial S_1}{\partial y}
+\frac{\partial S_2}{\partial x}.
+\]</div>
+<p>This separates C-points into the standard Star, Lemon, and Monstar morphologies:</p>
 <ul>
-<li><strong>Units and Phase:</strong> VectorWaves uses natural units where <code>c = 1</code>. The time-harmonic phase accumulated by each plane-wave mode is <code>phase = kx·x + ky·y + kz·z − ω·t</code>. Therefore, time <code>t</code> is defined in units of length (equivalent to <code>ct</code> in SI). Wavenumber <code>k</code> is stored in <code>rad / spatial_unit</code>, where the spatial unit is determined by <code>op.size</code> and <code>op.spacing</code>.</li>
-<li><strong>Beam Axis:</strong> The default propagation axis is <code>z</code>. <code>compute_on_op</code> returns field values on the transverse (xy) plane at a given <code>z</code>, while <code>compute_cloud</code> and <code>compute_point</code> evaluate arbitrary 3D spatial points directly.</li>
-<li><strong>Jacobian Indexing:</strong> Spatial derivatives follow the convention <code>jacobian_E[i, j, ...]</code> representing <code>dE_i / dx_j</code> (first index is field component, second is derivative direction). <code>div_E</code> is its trace; <code>curl_E</code> arises from its antisymmetric part.</li>
-<li><strong>Polarization Handedness:</strong> <code>+1</code> indicates Left Circular Polarization (LCP) / Counter-Clockwise (CCW) rotation. <code>−1</code> indicates Right Circular Polarization (RCP) / Clockwise (CW) rotation. This convention is determined by the sign of the Stokes parameter <code>S3</code> and is used consistently throughout the singularity finders.</li>
+<li><strong>Star:</strong> <span class="arithmatex">\(I_C=-\frac12\)</span>, corresponding to <span class="arithmatex">\(D_I&lt;0\)</span>. The orientation field contains three hyperbolic sectors.</li>
+<li><strong>Lemon:</strong> <span class="arithmatex">\(I_C=+\frac12\)</span>, with <span class="arithmatex">\(D_I&gt;0\)</span> and <span class="arithmatex">\(NL_{\mathrm{disc}}&lt;0\)</span>. The pattern contains one elliptic sector and one radial line.</li>
+<li><strong>Monstar:</strong> <span class="arithmatex">\(I_C=+\frac12\)</span>, with <span class="arithmatex">\(D_I&gt;0\)</span> and <span class="arithmatex">\(NL_{\mathrm{disc}}&gt;0\)</span>. The pattern contains three radial lines and mixed parabolic sectors.</li>
 </ul>
-<h2 id="4-polarization-topology-singularities">4. Polarization Topology &amp; Singularities</h2>
-<p>In non-paraxial fields, polarization ellipses are not confined to the transverse plane. The ellipse lives in a plane defined by its major and minor axes, with an area vector given by <code>Re(E) × Im(E)</code>. Two natural, degenerate topological singularities arise in full 3D:</p>
-<ul>
-<li><strong>Lᵀ-points (True 3D Linear Polarization):</strong> Occur where <code>Re(E) × Im(E) = 0</code>. The area vector vanishes, meaning the polarization ellipse collapses strictly to a line. Found by <code>find_C_T_points</code>.</li>
-<li><strong>Cᵀ-points (True 3D Circular Polarization):</strong> Occur where <code>E·E = 0</code> (complex dot product, no conjugate). In the plane of the ellipse, the major and minor axes are perfectly equal. Found by <code>find_L_T_points</code>.</li>
-</ul>
-<h3 id="stokes-projections">Stokes Projections</h3>
-<p>The Stokes C-points found by <code>find_stokes_C_points</code>, where <code>s1 = s2 = 0</code>, equivalently <code>Ex² + Ey² = 0</code> (ignoring Ez, transverse projection). In the paraxial limit, Ez is negligible, making Stokes C-points and Cᵀ-points nearly identical. However, for strongly non-paraxial fields (e.g., tight focuses or isotropic sources), Ez is significant. Here, the two singularity sets become geometrically distinct, and transverse Stokes C-points become biased approximations.</p>
-<h3 id="singularity-refinement">Singularity Refinement</h3>
-<p>To precisely locate these singularities, finders first locate candidates on the discrete <code>E_grid</code>, then refine their positions to sub-pixel accuracy against a specific residual:</p>
+<p>These classifications concern the transverse Stokes C-point morphology and should not be conflated with the existence or morphology of a full 3D <span class="arithmatex">\(C^T\)</span>-point.</p>
+<hr />
+<h2 id="4-numerical-detection-of-singularities">4. Numerical Detection of Singularities</h2>
+<p>Singularity detection uses a two-stage process: discrete candidate extraction followed by continuous numerical refinement.</p>
+<h3 id="candidate-extraction">Candidate extraction</h3>
+<p>The initial search operates on the discrete field grid.</p>
+<p>For scalar zero conditions, <code>_zero_cross_mask</code> identifies <span class="arithmatex">\(2\times2\)</span> grid cells satisfying the strict sign-change condition</p>
+<div class="arithmatex">\[
+f_{\max}&gt;0
+\quad\land\quad
+f_{\min}&lt;0.
+\]</div>
+<p>For the two-component singularity conditions, <code>_batched_plane_fit</code> locally approximates the relevant fields by planes and estimates a sub-pixel candidate position</p>
+<div class="arithmatex">\[
+(\delta x,\delta y)\in[0,1)^2.
+\]</div>
+<p>These candidate positions provide initial guesses for the continuous refinement stage.</p>
+<h3 id="batched-newton-refinement">Batched Newton refinement</h3>
+<p>Candidate points are refined simultaneously using the field-evaluation machinery of <code>compute_cloud</code>.</p>
+<p>For a two-dimensional system</p>
+<div class="arithmatex">\[
+\mathbf f(x,y)=
+\begin{pmatrix}
+f_1(x,y)\\
+f_2(x,y)
+\end{pmatrix}
+=
+\mathbf0,
+\]</div>
+<p>Newton-Raphson updates the position according to</p>
+<div class="arithmatex">\[
+\mathbf r_{k+1}
+=
+\mathbf r_k
+-
+J^{-1}\mathbf f,
+\]</div>
+<p>where <span class="arithmatex">\(J\)</span> is the <span class="arithmatex">\(2\times2\)</span> Jacobian.</p>
+<p>Converged candidates are deactivated dynamically during the batched iterations.</p>
+<p>The refinement conditions are:</p>
 <table>
 <thead>
 <tr>
 <th>Singularity</th>
-<th>Condition</th>
-<th>Solver</th>
+<th>Mathematical condition</th>
+<th>Refinement method</th>
 <th>Residual</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>Stokes C-point</strong></td>
-<td><code>s1 = s2 = 0</code></td>
-<td>Newton-Raphson</td>
-<td><code>sqrt(s1² + s2²)</code></td>
+<td><span class="arithmatex">\(s_1=0,\;s_2=0\)</span></td>
+<td>2D Newton-Raphson</td>
+<td><span class="arithmatex">\(\sqrt{s_1^2+s_2^2}\)</span></td>
 </tr>
 <tr>
-<td><strong>Cᵀ-point</strong></td>
-<td><code>E·E = 0</code></td>
-<td>Newton-Raphson</td>
-<td><code>\|E·E\|</code></td>
+<td><strong><span class="arithmatex">\(C^T\)</span>-point</strong></td>
+<td><span class="arithmatex">\(\operatorname{Re}(\mathbf E\cdot\mathbf E)=0,\;\operatorname{Im}(\mathbf E\cdot\mathbf E)=0\)</span></td>
+<td>2D Newton-Raphson</td>
+<td><span class="arithmatex">\(\|\mathbf E\cdot\mathbf E\|\)</span></td>
 </tr>
 <tr>
-<td><strong>Lᵀ-point</strong></td>
-<td><code>Re(E) × Im(E) = 0</code></td>
-<td>Gauss-Newton</td>
-<td><code>\|Re(E) × Im(E)\|</code></td>
+<td><strong><span class="arithmatex">\(L^T\)</span>-point</strong></td>
+<td><span class="arithmatex">\(\operatorname{Re}(\mathbf E)\times\operatorname{Im}(\mathbf E)=0\)</span></td>
+<td>2D Gauss-Newton</td>
+<td><span class="arithmatex">\(\|\operatorname{Re}(\mathbf E)\times\operatorname{Im}(\mathbf E)\|\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>While Stokes C-points and Cᵀ-points are exact square systems (2 conditions, 2 unknowns in a plane) solvable by Newton-Raphson, Lᵀ-points appear overdetermined (3 scalar conditions on 2 unknowns). Because the area vector <code>N</code> is always orthogonal to <code>E</code>, its components aren't independent. The solver utilizes Gauss-Newton to minimize <code>|N|²</code> instead.</p>
-<h3 id="a-note-on-tolerances">A Note on Tolerances</h3>
-<p>The Stokes C-point residual, <code>sqrt(s1² + s2²)</code>, is dimensionless since the normalized Stokes parameters absorb the local intensity <code>S0</code>. The default <code>value_tol = 1e-6</code> works reliably regardless of source power. </p>
-<p>Conversely, the residuals for Cᵀ and Lᵀ points possess units of intensity. In regions of low intensity—such as speckle dark spots or nodal lines—these absolute residuals can artificially fall below the threshold or induce instability. Tuning <code>config.source.intensity_scale</code> helps bring the field into a numerical regime where these dimensional tolerances are meaningful. </p>
-<h3 id="line-tracing">Line Tracing</h3>
-<p>Singularities form structures in 3D. <code>trace_stokes_C_lines</code>, <code>trace_C_T_lines</code>, and <code>trace_L_lines</code> walk outward from refined seed points along the local tangent in steps of size <code>ds</code>, utilizing a Newton corrector to continuously re-project each step back onto the singular condition manifold.</p>
+<p>For <span class="arithmatex">\(L^T\)</span>-points, the three components of the area vector provide an overdetermined nonlinear residual. The solver therefore uses a Gauss-Newton least-squares formulation, solved through the corresponding pseudoinverse/least-squares system rather than attempting to invert a square Jacobian.</p>
+<h3 id="spatial-deduplication">Spatial deduplication</h3>
+<p>The same physical singularity could be detected from multiple neighboring grid cells. After refinement, converged roots lying within the spatial tolerance <code>tol</code> are merged so that the same topological singularity is not counted multiple times.</p>
+<h3 id="dimensional-and-dimensionless-tolerances">Dimensional and Dimensionless Tolerances</h3>
+<p>The Stokes C-point residual</p>
+<div class="arithmatex">\[
+R_C=\sqrt{s_1^2+s_2^2}
+\]</div>
+<p>is dimensionless because the normalized Stokes parameters remove the local intensity scale <span class="arithmatex">\(S_0\)</span>. Consequently, the default</p>
+<pre><code class="language-text">value_tol = 1e-6
+</code></pre>
+<p>is approximately invariant under an overall rescaling of the field amplitude.</p>
+<p>The <span class="arithmatex">\(C^T\)</span> and <span class="arithmatex">\(L^T\)</span> residuals are different. Since they are constructed directly from products of electric-field components,</p>
+<div class="arithmatex">\[
+\mathbf E\cdot\mathbf E
+\sim |\mathbf E|^2,
+\]</div>
+<p>and</p>
+<div class="arithmatex">\[
+\operatorname{Re}(\mathbf E)
+\times
+\operatorname{Im}(\mathbf E)
+\sim |\mathbf E|^2,
+\]</div>
+<p>their numerical magnitudes depend on the overall field-intensity scale.</p>
+<p>This creates an important distinction between the singularity finders. Stokes C-point tolerances are naturally normalized by the local intensity through the Stokes parameters, whereas <span class="arithmatex">\(C^T\)</span> and <span class="arithmatex">\(L^T\)</span> refinement uses dimensional residuals.</p>
+<p>In low-intensity regions, such as dark spots, the dimensional residuals can become numerically small even when the field is not sufficiently well-conditioned for reliable refinement. Conversely, a tolerance appropriate for a high-intensity region may be too strict in a weak-field region.</p>
+<p>In practice, the numerical scale can therefore be controlled either by adjusting <code>config.source.intensity_scale</code> or by choosing appropriate absolute tolerances for the <span class="arithmatex">\(C^T\)</span> and <span class="arithmatex">\(L^T\)</span> residuals.</p>
+<hr />
+<h2 id="5-3d-singularity-line-tracing">5. 3D Singularity-Line Tracing</h2>
+<p>In three dimensions, a polarization singularity is generally not an isolated point but a continuous curve.</p>
+<p>The functions</p>
+<pre><code class="language-text">trace_stokes_C_lines
+trace_C_T_lines
+trace_L_lines
+</code></pre>
+<p>perform curve continuation from refined singularity seeds using a predictor-corrector scheme.</p>
+<h3 id="predictor-step">Predictor step</h3>
+<p>A singularity line is represented locally as the intersection of two zero-level surfaces,</p>
+<div class="arithmatex">\[
+f_1(\mathbf r)=0,
+\qquad
+f_2(\mathbf r)=0.
+\]</div>
+<p>The tangent to their intersection is therefore</p>
+<div class="arithmatex">\[
+\mathbf t
+=
+\frac{
+\nabla f_1\times\nabla f_2
+}{
+\|\nabla f_1\times\nabla f_2\|
+}.
+\]</div>
+<p>A step of size <span class="arithmatex">\(ds\)</span> predicts the next point along the curve,</p>
+<div class="arithmatex">\[
+\mathbf r_{\mathrm{pred}}
+=
+\mathbf r_k+ds\,\mathbf t_k.
+\]</div>
+<p>The tangent orientation is guarded by requiring</p>
+<div class="arithmatex">\[
+\mathbf t_k\cdot\mathbf t_{k-1}&gt;0,
+\]</div>
+<p>which prevents numerical sign changes in the tangent from producing artificial <span class="arithmatex">\(180^\circ\)</span> reversals.</p>
+<h3 id="corrector-step">Corrector step</h3>
+<p>The predicted point generally does not lie exactly on the singularity line. The corrector therefore solves</p>
+<div class="arithmatex">\[
+\mathbf f(\mathbf r)=0
+\]</div>
+<p>locally.</p>
+<p>Because there are two scalar constraints but three spatial coordinates, the spatial Jacobian has dimensions</p>
+<div class="arithmatex">\[
+J\in\mathbb R^{2\times3}.
+\]</div>
+<p>The correction is therefore obtained using the minimum-norm solution of the linearized system,</p>
+<div class="arithmatex">\[
+\Delta\mathbf r
+=
+-J^T(JJ^T)^{-1}\mathbf f.
+\]</div>
+<p>This is the Moore-Penrose pseudoinverse solution for the underdetermined correction problem. The predicted point is iteratively projected back onto the singularity curve.</p>
+<h3 id="lt-line-tracing"><span class="arithmatex">\(L^T\)</span>-line tracing</h3>
+<p>For <span class="arithmatex">\(L^T\)</span>-lines, the singular condition is</p>
+<div class="arithmatex">\[
+\mathbf N=
+(N_x,N_y,N_z)=0.
+\]</div>
+<p>Any two independent components can locally define the curve, but a poorly chosen pair can become nearly linearly dependent and make the correction ill-conditioned.</p>
+<p>VectorWaves therefore dynamically selects the pair <span class="arithmatex">\((N_i,N_j)\)</span> whose gradients have the largest cross-product magnitude,</p>
+<div class="arithmatex">\[
+\left\|
+\nabla N_i\times\nabla N_j
+\right\|,
+\]</div>
+<p>providing a locally well-conditioned pair of constraints. This makes <span class="arithmatex">\(L^T\)</span>-line tracing less sensitive to the orientation of the polarization ellipse or the choice of coordinate axes.</p>
 
 
 
@@ -952,7 +1393,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
     
   </body>
