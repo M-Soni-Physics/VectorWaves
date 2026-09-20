@@ -58,7 +58,7 @@ For tutorials and examples, please refer to the [official documentation](https:/
 
 If you use VectorWaves in your research, please cite it:
 
-​```bibtex
+```bibtex
 @software{soni_vectorwaves,
   author  = {Soni, Mayank},
   title   = {VectorWaves},
@@ -66,4 +66,4 @@ If you use VectorWaves in your research, please cite it:
   doi     = {10.5281/zenodo.21762335},
   url     = {https://github.com/M-Soni-Physics/VectorWaves}
 }
-​```
+```

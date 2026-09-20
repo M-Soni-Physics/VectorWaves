@@ -98,7 +98,7 @@ Contributions, bug reports, and feature requests are welcome! If you want to con
 
 If you use VectorWaves in your research, please cite it:
 
-​```bibtex
+```bibtex
 @software{soni_vectorwaves,
   author  = {Soni, Mayank},
   title   = {VectorWaves},
@@ -106,6 +106,6 @@ If you use VectorWaves in your research, please cite it:
   doi     = {10.5281/zenodo.21762335},
   url     = {https://github.com/M-Soni-Physics/VectorWaves}
 }
-​```
+```
 
 GitHub's "Cite this repository" button also reads `CITATION.cff`.
